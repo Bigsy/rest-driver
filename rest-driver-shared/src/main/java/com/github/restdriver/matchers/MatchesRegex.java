@@ -21,21 +21,21 @@ import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
 public class MatchesRegex extends TypeSafeMatcher<String> {
-    
+
     private final Pattern pattern;
-    
+
     public MatchesRegex(Pattern pattern) {
         this.pattern = pattern;
     }
-    
+
     @Override
     public final void describeTo(Description description) {
         description.appendText("A string matching the regular expression: " + pattern.toString());
     }
-    
+
     @Override
     protected boolean matchesSafely(String item) {
         return pattern.matcher(item).matches();
     }
-    
+
 }

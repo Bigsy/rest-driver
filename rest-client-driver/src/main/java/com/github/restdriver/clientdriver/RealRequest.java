@@ -21,17 +21,17 @@ import java.util.Map;
 import com.github.restdriver.clientdriver.ClientDriverRequest.Method;
 
 public interface RealRequest {
-    
+
     Method getMethod();
-    
+
     String getPath();
-    
+
     Map<String, Collection<String>> getParams();
-    
+
     Map<String, Object> getHeaders();
-    
+
     String getBodyContentType();
-    
-    String getBodyContent();
-    
+
+    byte[] getBodyContent();
+
 }

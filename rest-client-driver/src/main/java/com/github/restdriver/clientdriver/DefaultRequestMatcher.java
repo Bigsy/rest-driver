@@ -27,8 +27,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Implementation of {@link RequestMatcher}. This implementation expects exact match in terms of the HTTP method, the
- * path &amp; query string, and any body of the request.
+ * Implementation of {@link RequestMatcher}. This implementation expects exact
+ * match in terms of the HTTP method, the path &amp; query string, and any body
+ * of the request.
  */
 public final class DefaultRequestMatcher implements RequestMatcher {
 
@@ -48,7 +49,7 @@ public final class DefaultRequestMatcher implements RequestMatcher {
         if (!hasSameQueryString(realRequest, expectedRequest)) {
             return false;
         }
-        
+
         if (hasExcludedHeaders(realRequest, expectedRequest)) {
             return false;
         }
@@ -153,17 +154,17 @@ public final class DefaultRequestMatcher implements RequestMatcher {
 
         return true;
     }
-    
+
     private boolean hasExcludedHeaders(RealRequest realRequest, ClientDriverRequest expectedRequest) {
         Set<String> excludedHeaders = expectedRequest.getExcludedHeaders();
         Map<String, Object> actualHeaders = realRequest.getHeaders();
-        
+
         for (String excludedHeader : excludedHeaders) {
             if (actualHeaders.containsKey(excludedHeader)) {
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -212,7 +213,7 @@ public final class DefaultRequestMatcher implements RequestMatcher {
     private boolean hasSameBody(RealRequest realRequest, ClientDriverRequest expectedRequest) {
 
         if (expectedRequest.getBodyContentType() != null) {
-            String actualContentType = realRequest.getBodyContentType();
+            String actualContentType = new String(realRequest.getBodyContentType());
             if (actualContentType == null) {
                 return false;
             }
@@ -230,7 +231,7 @@ public final class DefaultRequestMatcher implements RequestMatcher {
         }
 
         if (expectedRequest.getBodyContentMatcher() != null) {
-            String actualContent = realRequest.getBodyContent();
+            String actualContent = new String(realRequest.getBodyContent());
 
             boolean hasMatchingBodyContent = expectedRequest.getBodyContentMatcher().matches(actualContent);
 

@@ -42,11 +42,12 @@ public final class RestClientDriver {
     public static ClientDriverRequest onRequestTo(Matcher<? extends String> path) {
         return new ClientDriverRequest(path);
     }
-    
+
     /**
      * Creates a new {@link ClientDriverRequest} object.
      * 
-     * @param path The path to match
+     * @param path
+     *            The path to match
      * @return The newly created request
      */
     public static ClientDriverRequest onRequestTo(String path) {
@@ -115,18 +116,20 @@ public final class RestClientDriver {
     /**
      * Waits for specified time for populated {@link BodyCapture} object.
      * 
-     * @param bodyCapture The capture to wait for.
-     * @param time The number of units (given in timeUnit) to wait for.
-     * @param timeUnit The unit
+     * @param bodyCapture
+     *            The capture to wait for.
+     * @param time
+     *            The number of units (given in timeUnit) to wait for.
+     * @param timeUnit
+     *            The unit
      */
     public static void waitFor(BodyCapture<?> bodyCapture, long time, TimeUnit timeUnit) {
         long waitUntil = System.currentTimeMillis() + timeUnit.toMillis(time);
-
         while (waitUntil > System.currentTimeMillis()) {
             if (bodyCapture.getContent() != null) {
                 break;
             }
-            
+
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -137,4 +140,3 @@ public final class RestClientDriver {
     }
 
 }
-

@@ -34,14 +34,14 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 public class HttpRealRequest implements RealRequest {
-    
+
     private final Method method;
     private final String path;
     private final Multimap<String, String> params;
     private final Map<String, Object> headers;
-    private final String bodyContent;
+    private final byte[] bodyContent;
     private final String bodyContentType;
-    
+
     public HttpRealRequest(HttpServletRequest request) {
         this.path = request.getPathInfo();
         this.method = Enum.valueOf(Method.class, request.getMethod());
@@ -66,26 +66,27 @@ public class HttpRealRequest implements RealRequest {
                 headers.put(headerName, request.getHeader(headerName));
             }
         }
-        
+
         try {
-            this.bodyContent = IOUtils.toString(request.getInputStream());
+            //this.bodyContent = IOUtils.toString(request.getInputStream());
+            this.bodyContent = IOUtils.toByteArray(request.getInputStream());
         } catch (IOException e) {
             throw new RuntimeException("Failed to read body of request", e);
         }
-        
+
         this.bodyContentType = request.getContentType();
     }
-    
+
     @Override
     public final Method getMethod() {
         return method;
     }
-    
+
     @Override
     public final String getPath() {
         return path;
     }
-    
+
     @Override
     public final Map<String, Collection<String>> getParams() {
         if (params == null) {
@@ -93,7 +94,7 @@ public class HttpRealRequest implements RealRequest {
         }
         return Collections.unmodifiableMap(params.asMap());
     }
-    
+
     @Override
     public final Map<String, Object> getHeaders() {
         if (headers == null) {
@@ -101,15 +102,15 @@ public class HttpRealRequest implements RealRequest {
         }
         return Collections.unmodifiableMap(headers);
     }
-    
+
     @Override
-    public final String getBodyContent() {
+    public final byte[] getBodyContent() {
         return bodyContent;
     }
-    
+
     @Override
     public final String getBodyContentType() {
         return bodyContentType;
     }
-    
+
 }

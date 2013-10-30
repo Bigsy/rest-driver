@@ -43,7 +43,8 @@ public final class ClientDriverRequest {
     private static final String CONTENT_TYPE = "Content-Type";
 
     /**
-     * HTTP method enum for specifying which method you expect to be called with.
+     * HTTP method enum for specifying which method you expect to be called
+     * with.
      */
     public enum Method {
         GET, POST, PUT, DELETE, OPTIONS, HEAD, TRACE
@@ -59,11 +60,12 @@ public final class ClientDriverRequest {
     private Matcher<? extends String> bodyContentType;
     private boolean anyParams;
     private BodyCapture<?> bodyCapture;
-    
+
     /**
      * Constructor taking String matcher.
-     *
-     * @param path The mandatory argument is the path which will be listened on
+     * 
+     * @param path
+     *            The mandatory argument is the path which will be listened on
      */
     public ClientDriverRequest(Matcher<? extends String> path) {
         this.path = path;
@@ -76,8 +78,9 @@ public final class ClientDriverRequest {
 
     /**
      * Constructor taking String.
-     *
-     * @param path The mandatory argument is the path which will be listened on
+     * 
+     * @param path
+     *            The mandatory argument is the path which will be listened on
      */
     public ClientDriverRequest(String path) {
         this(new IsEqual<String>(path));
@@ -85,8 +88,9 @@ public final class ClientDriverRequest {
 
     /**
      * Constructor taking Pattern.
-     *
-     * @param path The mandatory argument is the path which will be listened on
+     * 
+     * @param path
+     *            The mandatory argument is the path which will be listened on
      */
     public ClientDriverRequest(Pattern path) {
         this(new MatchesRegex(path));
@@ -94,7 +98,7 @@ public final class ClientDriverRequest {
 
     /**
      * Get the path.
-     *
+     * 
      * @return the path which requests are expected on.
      */
     public Matcher<? extends String> getPath() {
@@ -102,8 +106,10 @@ public final class ClientDriverRequest {
     }
 
     /**
-     * @param withMethod the method to set
-     * @return the object you called the method on, so you can chain these calls.
+     * @param withMethod
+     *            the method to set
+     * @return the object you called the method on, so you can chain these
+     *         calls.
      */
     public ClientDriverRequest withMethod(Method withMethod) {
         this.method = withMethod;
@@ -118,9 +124,9 @@ public final class ClientDriverRequest {
     }
 
     /**
-     * Setter for expecting any number of querystring parameters with any values.
-     * With this set, any expected parameters are ignored.
-     *
+     * Setter for expecting any number of querystring parameters with any
+     * values. With this set, any expected parameters are ignored.
+     * 
      * @return the request
      */
     public ClientDriverRequest withAnyParams() {
@@ -130,10 +136,13 @@ public final class ClientDriverRequest {
 
     /**
      * Setter for expecting query-string parameters on the end of the url.
-     *
-     * @param key   The key from ?key=value
-     * @param value The value from ?key=value in the form of a String
-     * @return the object you called the method on, so you can chain these calls.
+     * 
+     * @param key
+     *            The key from ?key=value
+     * @param value
+     *            The value from ?key=value in the form of a String
+     * @return the object you called the method on, so you can chain these
+     *         calls.
      */
     public ClientDriverRequest withParam(String key, String value) {
         params.put(key, new IsEqual<String>(value));
@@ -142,10 +151,13 @@ public final class ClientDriverRequest {
 
     /**
      * Setter for expecting query-string parameters on the end of the url.
-     *
-     * @param key   The key from ?key=value
-     * @param value The value from ?key=value in the form of a String
-     * @return the object you called the method on, so you can chain these calls.
+     * 
+     * @param key
+     *            The key from ?key=value
+     * @param value
+     *            The value from ?key=value in the form of a String
+     * @return the object you called the method on, so you can chain these
+     *         calls.
      */
     public ClientDriverRequest withParam(String key, int value) {
         return withParam(key, String.valueOf(value));
@@ -153,10 +165,13 @@ public final class ClientDriverRequest {
 
     /**
      * Setter for expecting query-string parameters on the end of the url.
-     *
-     * @param key   The key from ?key=value
-     * @param value The value from ?key=value in the form of a String
-     * @return the object you called the method on, so you can chain these calls.
+     * 
+     * @param key
+     *            The key from ?key=value
+     * @param value
+     *            The value from ?key=value in the form of a String
+     * @return the object you called the method on, so you can chain these
+     *         calls.
      */
     public ClientDriverRequest withParam(String key, long value) {
         return withParam(key, String.valueOf(value));
@@ -164,10 +179,13 @@ public final class ClientDriverRequest {
 
     /**
      * Setter for expecting query-string parameters on the end of the url.
-     *
-     * @param key   The key from ?key=value
-     * @param value The value from ?key=value in the form of a String
-     * @return the object you called the method on, so you can chain these calls.
+     * 
+     * @param key
+     *            The key from ?key=value
+     * @param value
+     *            The value from ?key=value in the form of a String
+     * @return the object you called the method on, so you can chain these
+     *         calls.
      */
     public ClientDriverRequest withParam(String key, boolean value) {
         return withParam(key, String.valueOf(value));
@@ -175,10 +193,13 @@ public final class ClientDriverRequest {
 
     /**
      * Setter for expecting query-string parameters on the end of the url.
-     *
-     * @param key   The key from ?key=value
-     * @param value The value from ?key=value in the form of a String
-     * @return the object you called the method on, so you can chain these calls.
+     * 
+     * @param key
+     *            The key from ?key=value
+     * @param value
+     *            The value from ?key=value in the form of a String
+     * @return the object you called the method on, so you can chain these
+     *         calls.
      */
     public ClientDriverRequest withParam(String key, Object value) {
         return withParam(key, value.toString());
@@ -186,10 +207,13 @@ public final class ClientDriverRequest {
 
     /**
      * Setter for expecting query-string parameters on the end of the url.
-     *
-     * @param key   The key from ?key=value
-     * @param value The value from ?key=value in the form of a Pattern
-     * @return the object you called the method on, so you can chain these calls.
+     * 
+     * @param key
+     *            The key from ?key=value
+     * @param value
+     *            The value from ?key=value in the form of a Pattern
+     * @return the object you called the method on, so you can chain these
+     *         calls.
      */
     public ClientDriverRequest withParam(String key, Pattern value) {
         params.put(key, new MatchesRegex(value));
@@ -198,10 +222,13 @@ public final class ClientDriverRequest {
 
     /**
      * Setter for expecting query-string parameters on the end of the url.
-     *
-     * @param key   The key from ?key=value
-     * @param value The value from ?key=value in the form of a Matcher
-     * @return the object you called the method on, so you can chain these calls.
+     * 
+     * @param key
+     *            The key from ?key=value
+     * @param value
+     *            The value from ?key=value in the form of a Matcher
+     * @return the object you called the method on, so you can chain these
+     *         calls.
      */
     public ClientDriverRequest withParam(String key, Matcher<? extends String> value) {
         params.put(key, value);
@@ -209,10 +236,13 @@ public final class ClientDriverRequest {
     }
 
     /**
-     * Setter for expecting multiple query-string parameters on the end of the url.
-     *
-     * @param newParams The map of key value pairs from ?key=value
-     * @return the object you called the method on, so you can chain these calls.
+     * Setter for expecting multiple query-string parameters on the end of the
+     * url.
+     * 
+     * @param newParams
+     *            The map of key value pairs from ?key=value
+     * @return the object you called the method on, so you can chain these
+     *         calls.
      */
     public ClientDriverRequest withParams(Map<String, Object> newParams) {
         for (Entry<String, Object> entry : newParams.entrySet()) {
@@ -243,7 +273,7 @@ public final class ClientDriverRequest {
 
     /**
      * toString.
-     *
+     * 
      * @return a String representation of the request
      */
     @Override
@@ -284,12 +314,15 @@ public final class ClientDriverRequest {
     }
 
     /**
-     * Setter for expecting body content and type, where content is in the form of a String and type is in the form of a
-     * String.
-     *
-     * @param withBodyContent the bodyContent to set
-     * @param withContentType eg "text/plain"
-     * @return the object you called the method on, so you can chain these calls.
+     * Setter for expecting body content and type, where content is in the form
+     * of a String and type is in the form of a String.
+     * 
+     * @param withBodyContent
+     *            the bodyContent to set
+     * @param withContentType
+     *            eg "text/plain"
+     * @return the object you called the method on, so you can chain these
+     *         calls.
      */
     public ClientDriverRequest withBody(String withBodyContent, String withContentType) {
         bodyContentMatcher = new IsEqual<String>(withBodyContent);
@@ -298,12 +331,15 @@ public final class ClientDriverRequest {
     }
 
     /**
-     * Setter for expecting body content and type, where content is in the form of a String and type is in the form of a
-     * Pattern.
-     *
-     * @param withBodyContent the bodyContent to set
-     * @param contentType     eg "text/plain"
-     * @return the object you called the method on, so you can chain these calls.
+     * Setter for expecting body content and type, where content is in the form
+     * of a String and type is in the form of a Pattern.
+     * 
+     * @param withBodyContent
+     *            the bodyContent to set
+     * @param contentType
+     *            eg "text/plain"
+     * @return the object you called the method on, so you can chain these
+     *         calls.
      */
     public ClientDriverRequest withBody(String withBodyContent, Pattern contentType) {
         bodyContentMatcher = new IsEqual<String>(withBodyContent);
@@ -312,12 +348,15 @@ public final class ClientDriverRequest {
     }
 
     /**
-     * Setter for expecting body content and type, where content is in the form of a Pattern and type is in the form of
-     * a String.
-     *
-     * @param withBodyContent the bodyContent to set
-     * @param contentType     eg "text/plain"
-     * @return the object you called the method on, so you can chain these calls.
+     * Setter for expecting body content and type, where content is in the form
+     * of a Pattern and type is in the form of a String.
+     * 
+     * @param withBodyContent
+     *            the bodyContent to set
+     * @param contentType
+     *            eg "text/plain"
+     * @return the object you called the method on, so you can chain these
+     *         calls.
      */
     public ClientDriverRequest withBody(Pattern withBodyContent, String contentType) {
         bodyContentMatcher = new MatchesRegex(withBodyContent);
@@ -326,12 +365,15 @@ public final class ClientDriverRequest {
     }
 
     /**
-     * Setter for expecting body content and type, where content is in the form of a Pattern and type is in the form of
-     * a Pattern.
-     *
-     * @param withBodyContent the bodyContent to set
-     * @param contentType     eg "text/plain"
-     * @return the object you called the method on, so you can chain these calls.
+     * Setter for expecting body content and type, where content is in the form
+     * of a Pattern and type is in the form of a Pattern.
+     * 
+     * @param withBodyContent
+     *            the bodyContent to set
+     * @param contentType
+     *            eg "text/plain"
+     * @return the object you called the method on, so you can chain these
+     *         calls.
      */
     public ClientDriverRequest withBody(Pattern withBodyContent, Pattern contentType) {
         bodyContentMatcher = new MatchesRegex(withBodyContent);
@@ -340,12 +382,15 @@ public final class ClientDriverRequest {
     }
 
     /**
-     * Setter for expecting body content and type, where content is in the form of a Matcher and type is in the form of
-     * a Pattern.
-     *
-     * @param bodyContentMatcher the Matcher&lt;String&gt; to use to set
-     * @param contentType        eg "text/plain"
-     * @return the object you called the method on, so you can chain these calls.
+     * Setter for expecting body content and type, where content is in the form
+     * of a Matcher and type is in the form of a Pattern.
+     * 
+     * @param bodyContentMatcher
+     *            the Matcher&lt;String&gt; to use to set
+     * @param contentType
+     *            eg "text/plain"
+     * @return the object you called the method on, so you can chain these
+     *         calls.
      */
     public ClientDriverRequest withBody(Matcher<? extends String> bodyContentMatcher, String contentType) {
         this.bodyContentMatcher = bodyContentMatcher;
@@ -354,9 +399,11 @@ public final class ClientDriverRequest {
     }
 
     /**
-     * Setter for adding a {@link BodyCapture} to the expectation for later assertions/debugging.
-     *
-     * @param bodyCapture the capturing object.
+     * Setter for adding a {@link BodyCapture} to the expectation for later
+     * assertions/debugging.
+     * 
+     * @param bodyCapture
+     *            the capturing object.
      * @return this, for chaining.
      */
     public ClientDriverRequest capturingBodyIn(BodyCapture<?> bodyCapture) {
@@ -367,12 +414,14 @@ public final class ClientDriverRequest {
     public BodyCapture<?> getBodyCapture() {
         return bodyCapture;
     }
-    
+
     /**
      * Setter for expecting a specific header name and value matcher.
-     *
-     * @param withHeaderName  the headerName to match on
-     * @param headerValueMatcher the matcher to use for the header value
+     * 
+     * @param withHeaderName
+     *            the headerName to match on
+     * @param headerValueMatcher
+     *            the matcher to use for the header value
      * @return the object you called the method on, so you can chain these calls
      */
     public ClientDriverRequest withHeader(String withHeaderName, Matcher<? extends String> headerValueMatcher) {
@@ -383,22 +432,26 @@ public final class ClientDriverRequest {
         }
         return this;
     }
-    
+
     /**
      * Setter for expecting a specific header name and value pair.
-     *
-     * @param withHeaderName  the headerName to match on
-     * @param withHeaderValue the headerValue to match on
+     * 
+     * @param withHeaderName
+     *            the headerName to match on
+     * @param withHeaderValue
+     *            the headerValue to match on
      * @return the object you called the method on, so you can chain these calls
      */
     public ClientDriverRequest withHeader(String withHeaderName, String withHeaderValue) {
         return withHeader(withHeaderName, new IsEqual<String>(withHeaderValue));
     }
-    
+
     /**
-     * Setter for expecting a specific header name not to be present on the request.
+     * Setter for expecting a specific header name not to be present on the
+     * request.
      * 
-     * @param withoutHeaderName the headerName to match on
+     * @param withoutHeaderName
+     *            the headerName to match on
      * @return the object you called the method on, so you can chain these calls
      */
     public ClientDriverRequest withoutHeader(String withoutHeaderName) {
@@ -407,10 +460,13 @@ public final class ClientDriverRequest {
     }
 
     /**
-     * Setter for expecting a specific header name and value pair, where value is in the form of a Pattern.
-     *
-     * @param withHeaderName  the headerName to match on
-     * @param withHeaderValue the headerValue to match on
+     * Setter for expecting a specific header name and value pair, where value
+     * is in the form of a Pattern.
+     * 
+     * @param withHeaderName
+     *            the headerName to match on
+     * @param withHeaderValue
+     *            the headerValue to match on
      * @return the object you called the method on, so you can chain these calls
      */
     public ClientDriverRequest withHeader(String withHeaderName, Pattern withHeaderValue) {
@@ -419,8 +475,9 @@ public final class ClientDriverRequest {
 
     /**
      * Setter for expecting a map of header name and value pairs.
-     *
-     * @param headers a map of header names to header values to match on
+     * 
+     * @param headers
+     *            a map of header names to header values to match on
      * @return the object you called the method on, so you can chain these calls
      */
     public ClientDriverRequest withHeaders(Map<String, Object> headers) {
@@ -428,7 +485,7 @@ public final class ClientDriverRequest {
             String headerName = entry.getKey();
             Object headerValue = entry.getValue();
             if (headerValue instanceof Pattern) {
-                withHeader(headerName, new MatchesRegex((Pattern)headerValue));
+                withHeader(headerName, new MatchesRegex((Pattern) headerValue));
             } else {
                 withHeader(headerName, new IsEqual<String>(headerValue.toString()));
             }
@@ -447,7 +504,7 @@ public final class ClientDriverRequest {
     public Map<String, Matcher<? extends String>> getHeaders() {
         return headers;
     }
-    
+
     /**
      * @return the excluded headers
      */
